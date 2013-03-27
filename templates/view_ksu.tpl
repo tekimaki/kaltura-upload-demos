@@ -24,65 +24,65 @@
 	//This handler checks if the SWF object was loaded or not
 	delegate.readyHandler = function()
 	{
-		flashObj = document.getElementById("uploader");
+		flashObj = $("uploader");
 		var pLoad = confirm("Uploader object loaded successfully!\n\nClick 'OK' to continue to the next step.");
 		
 		if(pLoad)
 		{
-			parent.parent.frames["Steps"].document.getElementById("Step0").style.display = "none";
-			parent.parent.frames["Steps"].document.getElementById("Step1").style.display = "";
+			$("Step0").style.display = "none";
+			$("Step1").style.display = "";
 		}
 	}
 
 	//This handler knows when content was selected for upload
 	delegate.selectHandler = function()
 	{
-		parent.parent.frames["Steps"].document.getElementById("Step1").style.display = "none";
-		parent.parent.frames["Steps"].document.getElementById("Step2").style.display = "";
-		parent.frames["Results"].document.getElementById("txtResults").value = parent.frames["Results"].document.getElementById("txtResults").value + "Total size to upload: " + flashObj.getTotalSize() + "\n\n";
-		txtResults = parent.frames["Results"].document.getElementById("txtResults").value;
-		parent.frames["Results"].document.getElementById("txtResults").value = parent.frames["Results"].document.getElementById("txtResults").value + "Error: " + flashObj.getError() + "\n\n";
-		parent.frames["Results"].document.getElementById("txtResults").value = parent.frames["Results"].document.getElementById("txtResults").value + "Error Indices: " + flashObj.getSelectedErrorIndices() + "\n\n";
+		$("Step1").style.display = "none";
+		$("Step2").style.display = "";
+		$("txtResults").value = $("txtResults").value + "Total size to upload: " + flashObj.getTotalSize() + "\n\n";
+		txtResults = $("txtResults").value;
+		$("txtResults").value = $("txtResults").value + "Error: " + flashObj.getError() + "\n\n";
+		$("txtResults").value = $("txtResults").value + "Error Indices: " + flashObj.getSelectedErrorIndices() + "\n\n";
 	}
 
 	//This handler fires when a single file is done uploading
 	delegate.singleUploadCompleteHandler = function(args)
 	{
-		parent.frames["Results"].document.getElementById("txtResults").value = parent.frames["Results"].document.getElementById("txtResults").value + "Single file done uploading: " + args[0].title + "\n";
-		parent.frames["Results"].document.getElementById("txtResults").value = parent.frames["Results"].document.getElementById("txtResults").value + "Error: " + flashObj.getError() + "\n\n";
+		$("txtResults").value = $("txtResults").value + "Single file done uploading: " + args[0].title + "\n";
+		$("txtResults").value = $("txtResults").value + "Error: " + flashObj.getError() + "\n\n";
 	}
 
 	//This handler fires when all files are done uploading
 	delegate.allUploadsCompleteHandler = function()
 	{
-		parent.frames["Results"].document.getElementById("txtResults").value = parent.frames["Results"].document.getElementById("txtResults").value + "All files done uploading.\n\n";
-		parent.parent.frames["Steps"].document.getElementById("Step2.1").style.display = "none";
-		parent.parent.frames["Steps"].document.getElementById("Step3").style.display = "";
-		parent.frames["Results"].document.getElementById("txtResults").value = parent.frames["Results"].document.getElementById("txtResults").value + "Error: " + flashObj.getError() + "\n\n";
+		$("txtResults").value = $("txtResults").value + "All files done uploading.\n\n";
+		$("Step2.1").style.display = "none";
+		$("Step3").style.display = "";
+		$("txtResults").value = $("txtResults").value + "Error: " + flashObj.getError() + "\n\n";
 		
 	}
 
 	//This handler fires up when the uploaded files are set as entries in the KMC.
 	delegate.entriesAddedHandler = function(entries)
 	{
-		parent.frames["Results"].document.getElementById("txtResults").value = parent.frames["Results"].document.getElementById("txtResults").value + "Done!\n\n";
+		$("txtResults").value = $("txtResults").value + "Done!\n\n";
 		
 		var txtEntries = "";
 		for(var i=0;i<entries.length;i++)
 		{
 			txtEntries = txtEntries + "* " + entries[i].title + ": " + entries[i].entryId + "\n";
 		}
-		parent.frames["Results"].document.getElementById("txtResults").value = parent.frames["Results"].document.getElementById("txtResults").value + txtEntries + "\n\n";
-		parent.parent.frames["Steps"].document.getElementById("Step3").style.display = "none";
-		parent.parent.frames["Steps"].document.getElementById("Step4").style.display = "";
-		parent.frames["Results"].document.getElementById("txtResults").value = parent.frames["Results"].document.getElementById("txtResults").value + "Error: " + flashObj.getError() + "\n\n";
+		$("txtResults").value = $("txtResults").value + txtEntries + "\n\n";
+		$("Step3").style.display = "none";
+		$("Step4").style.display = "";
+		$("txtResults").value = $("txtResults").value + "Error: " + flashObj.getError() + "\n\n";
 	}
 
 	//This handler returns the upload progress for each file selected for uploading
 	delegate.progressHandler = function(args)
 	{
 		UploadProgressText = "Uploading - " + args[2].title + ": " + args[0] + " / " + args[1];
-		parent.frames["Results"].document.getElementById("txtResults").value = txtResults + UploadProgressText + "\n\n";
+		$("txtResults").value = txtResults + UploadProgressText + "\n\n";
 	}
 
 	delegate.uiConfErrorHandler = function()
@@ -96,8 +96,8 @@
 	function upload()
 	{
 		flashObj.upload();
-		parent.parent.frames["Steps"].document.getElementById("Step2").style.display = "none";
-		parent.parent.frames["Steps"].document.getElementById("Step2.1").style.display = "";
+		$("Step2").style.display = "none";
+		$("Step2.1").style.display = "";
 	}
 
 	function setTags(tags, startIndex, endIndex)
@@ -118,27 +118,27 @@
 	function getFiles()
 	{
 		var files = flashObj.getFiles();
-		parent.frames["Results"].document.getElementById("txtResults").value = parent.frames["Results"].document.getElementById("txtResults").value + "Here are the uploaded files:\n-----------------------------\n";
+		$("txtResults").value = $("txtResults").value + "Here are the uploaded files:\n-----------------------------\n";
 		for(var i=0;i<files.length;i++)
 		{
-			parent.frames["Results"].document.getElementById("txtResults").value = parent.frames["Results"].document.getElementById("txtResults").value + "* " + files[i] + "\n\n";
+			$("txtResults").value = $("txtResults").value + "* " + files[i] + "\n\n";
 		}
-		parent.parent.frames["Steps"].document.getElementById("Step4").style.display = "none";
-		parent.parent.frames["Steps"].document.getElementById("Step5").style.display = "";
+		$("Step4").style.display = "none";
+		$("Step5").style.display = "";
 	}
 
 	//This function connect to the Kaltura networks and adds the uploaded content as entries into the KMC
 	function addEntries()
 	{
 		flashObj.addEntries();
-		parent.frames["Results"].document.getElementById("txtResults").value = parent.frames["Results"].document.getElementById("txtResults").value + "Setting entries. Please wait ... "
+		$("txtResults").value = $("txtResults").value + "Setting entries. Please wait ... "
 	}
 
 	//This function stops all active uploads
 	function stopUploads()
 	{
 		flashObj.stopUploads();
-		parent.frames["Results"].document.getElementById("txtResults").value = parent.frames["Results"].document.getElementById("txtResults").value + "All active uploads stopped.\n\n";
+		$("txtResults").value = $("txtResults").value + "All active uploads stopped.\n\n";
 	}
 
 	function setMaxUploads(value)
@@ -160,31 +160,31 @@
 
 	function addTagsFromForm()
 	{
-		var tags = document.getElementById("tagsInput").value.split(",");
+		var tags = $("tagsInput").value.split(",");
 		var startIndex = parseInt(tagsStartIndex.value);
 		var endIndex = parseInt(tagsEndIndex.value);
 
-		parent.frames["Results"].document.getElementById("txtResults").value = parent.frames["Results"].document.getElementById("txtResults").value + "The following tags will be added to the desired content: \n"
+		$("txtResults").value = $("txtResults").value + "The following tags will be added to the desired content: \n"
 		for(var i=0;i<tags.length;i++)
 		{
-			parent.frames["Results"].document.getElementById("txtResults").value = parent.frames["Results"].document.getElementById("txtResults").value + "* " + tags[i] + "\n";
+			$("txtResults").value = $("txtResults").value + "* " + tags[i] + "\n";
 		}
-		parent.frames["Results"].document.getElementById("txtResults").value = parent.frames["Results"].document.getElementById("txtResults").value + "\n";
+		$("txtResults").value = $("txtResults").value + "\n";
 		addTags(tags, startIndex, endIndex);
 	}
 
 	function setTagsFromForm()
 	{
-		var tags = document.getElementById("tagsInput").value.split(",");
+		var tags = $("tagsInput").value.split(",");
 		var startIndex = parseInt(tagsStartIndex.value);
 		var endIndex = parseInt(tagsEndIndex.value);
 
-		parent.frames["Results"].document.getElementById("txtResults").value = parent.frames["Results"].document.getElementById("txtResults").value + "The following tags will be set to the desired content: \n"
+		$("txtResults").value = $("txtResults").value + "The following tags will be set to the desired content: \n"
 		for(var i=0;i<tags.length;i++)
 		{
-			parent.frames["Results"].document.getElementById("txtResults").value = parent.frames["Results"].document.getElementById("txtResults").value + "* " + tags[i] + "\n";
+			$("txtResults").value = $("txtResults").value + "* " + tags[i] + "\n";
 		}
-		parent.frames["Results"].document.getElementById("txtResults").value = parent.frames["Results"].document.getElementById("txtResults").value + "\n";
+		$("txtResults").value = $("txtResults").value + "\n";
 		setTags(tags, startIndex, endIndex);
 	}
 
@@ -193,7 +193,7 @@
 		var startIndex = parseInt(titleStartIndex.value);
 		var endIndex = parseInt(titleEndIndex.value);
 
-		parent.frames["Results"].document.getElementById("txtResults").value = parent.frames["Results"].document.getElementById("txtResults").value + "The following title will be set to the desired content: " + titleInput.value + "\n\n"
+		$("txtResults").value = $("txtResults").value + "The following title will be set to the desired content: " + titleInput.value + "\n\n"
 		setTitle(titleInput.value, startIndex, endIndex);
 	}
 
@@ -247,25 +247,25 @@
 
 	function onLoadHandler()
 	{
-		tagsInput = document.getElementById("tagsInput");
-		tagsStartIndex = document.getElementById("tagsStartIndex");
-		tagsEndIndex = document.getElementById("tagsEndIndex");
+		tagsInput = $("tagsInput");
+		tagsStartIndex = $("tagsStartIndex");
+		tagsEndIndex = $("tagsEndIndex");
 
-		titleInput = document.getElementById("titleInput");
-		titleStartIndex = document.getElementById("titleStartIndex");
-		titleEndIndex = document.getElementById("titleEndIndex");
+		titleInput = $("titleInput");
+		titleStartIndex = $("titleStartIndex");
+		titleEndIndex = $("titleEndIndex");
 
-		removeStartIndex = document.getElementById("removeStartIndex");;
-		removeEndIndex = document.getElementById("removeEndIndex");
+		removeStartIndex = $("removeStartIndex");;
+		removeEndIndex = $("removeEndIndex");
 
-		maxUploadsInput = document.getElementById("maxUploadsInput");
-		partnerDataInput = document.getElementById("partnerDataInput");
+		maxUploadsInput = $("maxUploadsInput");
+		partnerDataInput = $("partnerDataInput");
 
-		groupId = document.getElementById("groupId");
-		permissions = document.getElementById("permissions");
-		screenName = document.getElementById("screenName");
-		siteUrl = document.getElementById("siteUrl");
-		mediaTypeInput = document.getElementById("mediaTypeInput");
+		groupId = $("groupId");
+		permissions = $("permissions");
+		screenName = $("screenName");
+		siteUrl = $("siteUrl");
+		mediaTypeInput = $("mediaTypeInput");
 	}
 
 	$(function() {
