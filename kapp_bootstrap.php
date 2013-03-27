@@ -31,7 +31,7 @@ if (!defined('KAPP_TEMP_PATH'))
 if (!defined('KAPP_CONFIG_PATH'))
 	define("KAPP_CONFIG_PATH", KAPP_ROOT_PATH . 'config' . DS);
 
-require_once( KAPP_EXTERNALS_PATH.'KSmarty.php' );
+require_once( KAPP_ROOT_PATH.'KSmarty.php' );
 
 global $gKSmarty;
 $gKSmarty = new KSmarty();

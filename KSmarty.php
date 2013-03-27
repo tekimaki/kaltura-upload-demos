@@ -33,7 +33,7 @@ class KSmarty extends Smarty{
 		parent::__construct();
 
 		// customize Smarty config
-		$this->mCompileRsrc = NULL;
+		// invalid property not sure why $this->mCompileRsrc = NULL;
 		$this->config_dir = "configs/";
 		$this->force_compile = FALSE;
 		$this->debugging = FALSE;

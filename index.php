@@ -2,11 +2,11 @@
 /* vim: :set fdm=marker : */
 
 // set page title default
-var $pageTitle = 'Kaltura Upload Demos';
+$pageTitle = 'Kaltura Upload Demos';
 // set page tpl default
-var $viewTpl = 'view_dashboard.tpl';
+$viewTpl = 'view_dashboard.tpl';
 // track valid session;
-var $validSession = FALSE;
+$validSession = FALSE;
 
 // System init
 require_once( 'kapp_bootstrap.php' );
@@ -29,7 +29,7 @@ if( !empty( $_COOKIE['ks'] ) && $ks = $_COOKIE['ks'] ){
 	  $conversionProfile = $client->conversionProfile->getdefault();
 	  $gSmarty->assign( 'conversionProfileId', $conversionProfile->id );
   }catch( Exception $e ){
-	  echo “Session Validation Failed: “ . $e->getMessage();
+	  echo 'Session Validation Failed: '.$e->getMessage();
   }
   // debug
   echo $result; die;
@@ -50,7 +50,7 @@ foreach ($rows as $v) {
 if( !empty( $_REQUEST['view'] ) && in_array( $_REQUEST['view'], array_keys($demoViews) ) ){
 	$viewTpl = $demoViews[$_REQUEST['view']]['tpl'];	
 	$pageTitle = $demoViews[$_REQUEST['view']]['page_title'];
-	$gSmarty->assign( 'uiconfId', $demoViews[$_REQUEST['view']]['uiconf_id'];
+	$gSmarty->assign( 'uiconfId', $demoViews[$_REQUEST['view']]['uiconf_id'] );
 }else{
 	// @TODO replace with graceful error handling
 	echo 'Invalid view request';
