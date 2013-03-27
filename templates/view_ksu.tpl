@@ -12,22 +12,6 @@
 <!---	JavaScript handler methods to react to upload events. -->
 <script type="text/javascript">
 {literal}
-/*
-	$flashVars = array();
-	//$flashVars["uid"]   = $partnerUserID; 
-	$flashVars["partnerId"] 		        = KALTURA_PARTNER_ID;
-	//$flashVars["subPId"] 		        = KALTURA_PARTNER_ID*100;
-	$flashVars["entryId"] 	 = -1;	     
-	$flashVars["ks"]   = $ks; 
-	//$flashVars["conversionProfile"]   = KALTURA_CONVERSION_PROFILE_ID; 
-	
-	$flashVars["maxFileSize"]   = 200; 
-	$flashVars["maxTotalSize"]   = 5000; 
-	$flashVars["maxUploads"]   = 100;
-	$flashVars["uiConfId"]   = KSU_UICONFID; 
-	$flashVars["jsDelegate"]   = "delegate"; 
-	*/
-
 	var flashObj;
 	var delegate = {};
 	
@@ -283,11 +267,13 @@
 		siteUrl = document.getElementById("siteUrl");
 		mediaTypeInput = document.getElementById("mediaTypeInput");
 	}
+
+	$(function() {
+	  onLoadHandler();
+	  });
 {/literal}
 </script>
 
-
-<body onload=onLoadHandler()>
 	<span id="flashContainer">
 		<form>
 			<BR />
@@ -315,15 +301,15 @@
 							partnerId: "{$partnerId}",
 							entryId: -1,
 							ks: "{$ks}",
-							uiConfId: {$uiconfId},
-							conversionProfile: {$conversionProfileId},
+							uiConfId: "{$uiconfId}",
+							conversionProfile: "{$conversionProfileId}",
 							//conversionMapping: "pdf,doc,docx: 3177041; flv,mp4,m4v: 493041",
 							browseImgSrc: "browseBtn.png",
 							browseBtnName: "browse",
 							jsDelegate: "delegate" 
 				{rdelim};
 				
-                swfobject.embedSWF("http://www.kaltura.com/kupload/ui_conf_id/{$uiconfId}", "uploader", "180", "20", "9.0.0", "expressInstall.swf",flashVars, params,attributes);
+                swfobject.embedSWF("http://www.kaltura.com/kupload/ui_conf_id/{$uiconfId}", "uploader", "180", "20", "9.0.0", "expressInstall.swf", flashVars, params, attributes);
 		</script>
 	
 
