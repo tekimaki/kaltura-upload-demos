@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<demos>
+	<demo>
+		<type>kcw</type>
+		<tpl>view_kcw.tpl</tpl>
+		<title>Kaltura Contribution Wizard</title>
+		<uiconf_id></uiconf_id>
+	</demo>
+	<demo>
+		<type>ksu</type>
+		<tpl>view_ksu.tpl</tpl>
+		<title>Kaltura Simple Uploader</title>
+		<uiconf_id></uiconf_id>
+	</demo>
+	<demo>
+		<type>krecord</type>
+		<tpl>view_krecord.tpl</tpl>
+		<title>Kaltura Webcam Recorder</title>
+		<uiconf_id></uiconf_id>
+	</demo>
+	<demo>
+		<type>htm5u</type>
+		<tpl>view_html5u.tpl</tpl>
+		<title>Kaltura HTML5 Uploader</title>
+		<uiconf_id></uiconf_id>
+	</demo>
+</demos>

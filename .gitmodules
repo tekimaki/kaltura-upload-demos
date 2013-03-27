@@ -1,0 +1,6 @@
+[submodule "externals/smarty"]
+	path = externals/smarty
+	url = git@github.com:tekimaki/smarty.git
+[submodule "externals/kalturaapilib"]
+	path = externals/kalturaapilib
+	url = git@github.com:tekimaki/kaltura-cl-php5.3.git

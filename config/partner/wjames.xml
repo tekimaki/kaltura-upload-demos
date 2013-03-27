@@ -1,0 +1,5 @@
+<partner>
+	<partner_id>{kaltura_partner_id}</partner_id>
+	<secret>{katlura_user_secret_code_string}</secret>
+	<user_id>{your.email@domain.com}</user_id>
+</partner>
