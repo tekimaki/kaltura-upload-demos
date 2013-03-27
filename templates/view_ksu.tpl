@@ -24,65 +24,65 @@
 	//This handler checks if the SWF object was loaded or not
 	delegate.readyHandler = function()
 	{
-		flashObj = $("uploader");
+		flashObj = $("#uploader");
 		var pLoad = confirm("Uploader object loaded successfully!\n\nClick 'OK' to continue to the next step.");
 		
 		if(pLoad)
 		{
-			$("Step0").style.display = "none";
-			$("Step1").style.display = "";
+			//$("#Step0").style.display = "none";
+			//$("#Step1").style.display = "";
 		}
 	}
 
 	//This handler knows when content was selected for upload
 	delegate.selectHandler = function()
 	{
-		$("Step1").style.display = "none";
-		$("Step2").style.display = "";
-		$("txtResults").value = $("txtResults").value + "Total size to upload: " + flashObj.getTotalSize() + "\n\n";
-		txtResults = $("txtResults").value;
-		$("txtResults").value = $("txtResults").value + "Error: " + flashObj.getError() + "\n\n";
-		$("txtResults").value = $("txtResults").value + "Error Indices: " + flashObj.getSelectedErrorIndices() + "\n\n";
+		//$("#Step1").style.display = "none";
+		//$("#Step2").style.display = "";
+		$("#txtResults").value = $("#txtResults").value + "Total size to upload: " + flashObj.getTotalSize() + "\n\n";
+		txtResults = $("#txtResults").value;
+		$("#txtResults").value = $("#txtResults").value + "Error: " + flashObj.getError() + "\n\n";
+		$("#txtResults").value = $("#txtResults").value + "Error Indices: " + flashObj.getSelectedErrorIndices() + "\n\n";
 	}
 
 	//This handler fires when a single file is done uploading
 	delegate.singleUploadCompleteHandler = function(args)
 	{
-		$("txtResults").value = $("txtResults").value + "Single file done uploading: " + args[0].title + "\n";
-		$("txtResults").value = $("txtResults").value + "Error: " + flashObj.getError() + "\n\n";
+		$("#txtResults").value = $("#txtResults").value + "Single file done uploading: " + args[0].title + "\n";
+		$("#txtResults").value = $("#txtResults").value + "Error: " + flashObj.getError() + "\n\n";
 	}
 
 	//This handler fires when all files are done uploading
 	delegate.allUploadsCompleteHandler = function()
 	{
-		$("txtResults").value = $("txtResults").value + "All files done uploading.\n\n";
-		$("Step2.1").style.display = "none";
-		$("Step3").style.display = "";
-		$("txtResults").value = $("txtResults").value + "Error: " + flashObj.getError() + "\n\n";
+		$("#txtResults").value = $("#txtResults").value + "All files done uploading.\n\n";
+		//$("#Step2.1").style.display = "none";
+		//$("#Step3").style.display = "";
+		$("#txtResults").value = $("#txtResults").value + "Error: " + flashObj.getError() + "\n\n";
 		
 	}
 
 	//This handler fires up when the uploaded files are set as entries in the KMC.
 	delegate.entriesAddedHandler = function(entries)
 	{
-		$("txtResults").value = $("txtResults").value + "Done!\n\n";
+		$("#txtResults").value = $("#txtResults").value + "Done!\n\n";
 		
 		var txtEntries = "";
 		for(var i=0;i<entries.length;i++)
 		{
 			txtEntries = txtEntries + "* " + entries[i].title + ": " + entries[i].entryId + "\n";
 		}
-		$("txtResults").value = $("txtResults").value + txtEntries + "\n\n";
-		$("Step3").style.display = "none";
-		$("Step4").style.display = "";
-		$("txtResults").value = $("txtResults").value + "Error: " + flashObj.getError() + "\n\n";
+		$("#txtResults").value = $("#txtResults").value + txtEntries + "\n\n";
+		//$("#Step3").style.display = "none";
+		//$("#Step4").style.display = "";
+		$("#txtResults").value = $("#txtResults").value + "Error: " + flashObj.getError() + "\n\n";
 	}
 
 	//This handler returns the upload progress for each file selected for uploading
 	delegate.progressHandler = function(args)
 	{
 		UploadProgressText = "Uploading - " + args[2].title + ": " + args[0] + " / " + args[1];
-		$("txtResults").value = txtResults + UploadProgressText + "\n\n";
+		$("#txtResults").value = txtResults + UploadProgressText + "\n\n";
 	}
 
 	delegate.uiConfErrorHandler = function()
@@ -96,8 +96,8 @@
 	function upload()
 	{
 		flashObj.upload();
-		$("Step2").style.display = "none";
-		$("Step2.1").style.display = "";
+		//$("#Step2").style.display = "none";
+		//$("#Step2.1").style.display = "";
 	}
 
 	function setTags(tags, startIndex, endIndex)
@@ -118,27 +118,27 @@
 	function getFiles()
 	{
 		var files = flashObj.getFiles();
-		$("txtResults").value = $("txtResults").value + "Here are the uploaded files:\n-----------------------------\n";
+		$("#txtResults").value = $("#txtResults").value + "Here are the uploaded files:\n-----------------------------\n";
 		for(var i=0;i<files.length;i++)
 		{
-			$("txtResults").value = $("txtResults").value + "* " + files[i] + "\n\n";
+			$("#txtResults").value = $("#txtResults").value + "* " + files[i] + "\n\n";
 		}
-		$("Step4").style.display = "none";
-		$("Step5").style.display = "";
+		//$("#Step4").style.display = "none";
+		//$("#Step5").style.display = "";
 	}
 
 	//This function connect to the Kaltura networks and adds the uploaded content as entries into the KMC
 	function addEntries()
 	{
 		flashObj.addEntries();
-		$("txtResults").value = $("txtResults").value + "Setting entries. Please wait ... "
+		$("#txtResults").value = $("#txtResults").value + "Setting entries. Please wait ... "
 	}
 
 	//This function stops all active uploads
 	function stopUploads()
 	{
 		flashObj.stopUploads();
-		$("txtResults").value = $("txtResults").value + "All active uploads stopped.\n\n";
+		$("#txtResults").value = $("#txtResults").value + "All active uploads stopped.\n\n";
 	}
 
 	function setMaxUploads(value)
@@ -160,31 +160,31 @@
 
 	function addTagsFromForm()
 	{
-		var tags = $("tagsInput").value.split(",");
+		var tags = $("#tagsInput").value.split(",");
 		var startIndex = parseInt(tagsStartIndex.value);
 		var endIndex = parseInt(tagsEndIndex.value);
 
-		$("txtResults").value = $("txtResults").value + "The following tags will be added to the desired content: \n"
+		$("#txtResults").value = $("#txtResults").value + "The following tags will be added to the desired content: \n"
 		for(var i=0;i<tags.length;i++)
 		{
-			$("txtResults").value = $("txtResults").value + "* " + tags[i] + "\n";
+			$("#txtResults").value = $("#txtResults").value + "* " + tags[i] + "\n";
 		}
-		$("txtResults").value = $("txtResults").value + "\n";
+		$("#txtResults").value = $("#txtResults").value + "\n";
 		addTags(tags, startIndex, endIndex);
 	}
 
 	function setTagsFromForm()
 	{
-		var tags = $("tagsInput").value.split(",");
+		var tags = $("#tagsInput").value.split(",");
 		var startIndex = parseInt(tagsStartIndex.value);
 		var endIndex = parseInt(tagsEndIndex.value);
 
-		$("txtResults").value = $("txtResults").value + "The following tags will be set to the desired content: \n"
+		$("#txtResults").value = $("#txtResults").value + "The following tags will be set to the desired content: \n"
 		for(var i=0;i<tags.length;i++)
 		{
-			$("txtResults").value = $("txtResults").value + "* " + tags[i] + "\n";
+			$("#txtResults").value = $("#txtResults").value + "* " + tags[i] + "\n";
 		}
-		$("txtResults").value = $("txtResults").value + "\n";
+		$("#txtResults").value = $("#txtResults").value + "\n";
 		setTags(tags, startIndex, endIndex);
 	}
 
@@ -193,7 +193,7 @@
 		var startIndex = parseInt(titleStartIndex.value);
 		var endIndex = parseInt(titleEndIndex.value);
 
-		$("txtResults").value = $("txtResults").value + "The following title will be set to the desired content: " + titleInput.value + "\n\n"
+		$("#txtResults").value = $("#txtResults").value + "The following title will be set to the desired content: " + titleInput.value + "\n\n";
 		setTitle(titleInput.value, startIndex, endIndex);
 	}
 
@@ -247,25 +247,25 @@
 
 	function onLoadHandler()
 	{
-		tagsInput = $("tagsInput");
-		tagsStartIndex = $("tagsStartIndex");
-		tagsEndIndex = $("tagsEndIndex");
+		tagsInput = $("#tagsInput");
+		tagsStartIndex = $("#tagsStartIndex");
+		tagsEndIndex = $("#tagsEndIndex");
 
-		titleInput = $("titleInput");
-		titleStartIndex = $("titleStartIndex");
-		titleEndIndex = $("titleEndIndex");
+		titleInput = $("#titleInput");
+		titleStartIndex = $("#titleStartIndex");
+		titleEndIndex = $("#titleEndIndex");
 
-		removeStartIndex = $("removeStartIndex");;
-		removeEndIndex = $("removeEndIndex");
+		removeStartIndex = $("#removeStartIndex");;
+		removeEndIndex = $("#removeEndIndex");
 
-		maxUploadsInput = $("maxUploadsInput");
-		partnerDataInput = $("partnerDataInput");
+		maxUploadsInput = $("#maxUploadsInput");
+		partnerDataInput = $("#partnerDataInput");
 
-		groupId = $("groupId");
-		permissions = $("permissions");
-		screenName = $("screenName");
-		siteUrl = $("siteUrl");
-		mediaTypeInput = $("mediaTypeInput");
+		groupId = $("#groupId");
+		permissions = $("#permissions");
+		screenName = $("#screenName");
+		siteUrl = $("#siteUrl");
+		mediaTypeInput = $("#mediaTypeInput");
 	}
 
 	$(function() {
@@ -374,3 +374,8 @@
 		<form>
 		</form>
 	</span>
+
+	<TABLE WIDTH="100%" BGCOLOR="#303030">
+		<TR><TD ALIGN="CENTER" VALIGN="MIDDLE"><H2><U><FONT COLOR="White">Results pane</FONT></U></H2><TD></TR>
+	</TABLE>
+	<TEXTAREA ID="txtResults" ROWS="15" COLS="160"></TEXTAREA>
