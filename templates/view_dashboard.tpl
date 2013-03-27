@@ -1,9 +1,9 @@
 {strip}
-<h2> kWidget Authentication</h2>
+<h2>Kaltura Uploader Demos</h2>
 <p>Please login to access demos</p>
 <ul>
 {foreach from=$demos item=demo}
-<li><a href="./index.php?view={$demo.type}">{$demo.title}</a><li>
+<li><a href="./index.php?view={$demo.type}">{$demo.title}</a></li>
 {/foreach}
 <ul>
 <div id="hostedAuthWidget"></div>

@@ -59,7 +59,7 @@ class KSmarty extends Smarty{
 	public function display( $pCenterTpl, $pBrowserTitle ){
 		$this->assign( 'centerTpl', $pCenterTpl );
 		$this->assign( 'browserTitle', $pBrowserTitle );
-		$this->display( 'kapp.tpl' );
+		parent::display( 'kapp.tpl' );
 		exit;
 	}
 
