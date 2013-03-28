@@ -10,3 +10,6 @@
 [submodule "externals/zf2"]
 	path = externals/zf2
 	url = https://github.com/zendframework/zf2
+[submodule "externals/jquery/jquery-ui"]
+	path = externals/jquery/jquery-ui
+	url = https://github.com/jquery/jquery-ui.git
