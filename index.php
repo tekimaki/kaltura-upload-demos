@@ -52,8 +52,10 @@ $gKSmarty->assign( 'demos', $demoViews );
 // If particular demo is requested load it
 if( !empty( $_REQUEST['view'] ) ){
 	if( in_array( $_REQUEST['view'], array_keys($demoViews) ) ){
+		// print_r( $demoViews[$_REQUEST['view']]);
 		$viewTpl = $demoViews[$_REQUEST['view']]['tpl'];	
-		$pageTitle = $demoViews[$_REQUEST['view']]['page_title'];
+		$pageTitle = $demoViews[$_REQUEST['view']]['title'];
+		$gKSmarty->assign( 'pageTitle', $pageTitle );
 		$gKSmarty->assign( 'uiconfId', $demoViews[$_REQUEST['view']]['uiconf_id'] );
 	}else{
 		// @TODO replace with graceful error handling

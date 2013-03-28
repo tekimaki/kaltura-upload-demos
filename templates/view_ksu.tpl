@@ -1,3 +1,5 @@
+{strip}
+{include file="header_inc.tpl"}
 <!---set style to enable widget overlap -->
 <style>
 		#flashContainer{ position:relative; }
@@ -22,6 +24,7 @@
 </div>
 <div id="resultsLog">Log</div>
 <div id="progressbar"></div>
+{/strip}
 
 <!--include external scripts and define constants -->
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
@@ -170,5 +173,3 @@
 	
 	swfobject.embedSWF("http://www.kaltura.com/kupload/ui_conf_id/{$uiconfId}", "uploader", "180", "20", "9.0.0", "expressInstall.swf", flashVars, params, attributes);
 </script>
-
-
