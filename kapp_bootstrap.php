@@ -31,6 +31,18 @@ if (!defined('KAPP_TEMP_PATH'))
 if (!defined('KAPP_CONFIG_PATH'))
 	define("KAPP_CONFIG_PATH", KAPP_ROOT_PATH . 'config' . DS);
 
+// setup zend autolaoder and kaltura namespace
+define('ZEND_AUTOLOADER_PATH', KAPP_EXTERNALS_PATH.'zf2/library/Zend/Loader/StandardAutoloader.php');
+define('KALTURA_LIBRARY_PATH', KAPP_EXTERNALS_PATH.'kalturaapilib/library/Kaltura' );
+
+// load zend framework 2
+require_once ZEND_AUTOLOADER_PATH;
+$loader = new \Zend\Loader\StandardAutoloader();
+// register Kaltura namespace
+$loader->registerNamespace( 'Kaltura', KALTURA_LIBRARY_PATH );
+$loader->register();
+
+// setup smarty
 require_once( KAPP_ROOT_PATH.'KSmarty.php' );
 
 global $gKSmarty;

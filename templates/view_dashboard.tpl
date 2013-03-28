@@ -12,6 +12,7 @@
 <script> 
 	kWidget.auth.getWidget( "hostedAuthWidget", function( userObject ){
 		$.cookie("ks", userObject.ks, { expires : 10 });
+		$.cookie("partnerId", userObject.partnerId, { expires : 10 });
 		$authTable = $('<table>').css( 'width', '350px' );
 		$.each( userObject, function( key, value){
 			$authTable.append( 
@@ -20,11 +21,11 @@
 					$('<td>').text( value )
 				)
 			)
-		});
+		})
 		$('#hostedAuthWidget').after( 
 			"Got login info: ",
 			$authTable 
-		);
+		)
 	});
 </script>
 {/literal}

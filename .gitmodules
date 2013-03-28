@@ -4,3 +4,9 @@
 [submodule "externals/kalturaapilib"]
 	path = externals/kalturaapilib
 	url = git@github.com:tekimaki/kaltura-cl-php5.3.git
+[submodule "externals/jquery/cookie"]
+	path = externals/jquery/cookie
+	url = https://github.com/carhartl/jquery-cookie.git
+[submodule "externals/zf2"]
+	path = externals/zf2
+	url = https://github.com/zendframework/zf2

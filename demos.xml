@@ -10,7 +10,7 @@
 		<type>ksu</type>
 		<tpl>view_ksu.tpl</tpl>
 		<title>Kaltura Simple Uploader</title>
-		<uiconf_id></uiconf_id>
+		<uiconf_id>9128611</uiconf_id>
 	</demo>
 	<demo>
 		<type>krecord</type>

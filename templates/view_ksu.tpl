@@ -304,7 +304,7 @@
 							uiConfId: "{$uiconfId}",
 							conversionProfile: "{$conversionProfileId}",
 							//conversionMapping: "pdf,doc,docx: 3177041; flv,mp4,m4v: 493041",
-							browseImgSrc: "browseBtn.png",
+							browseImgSrc: "./templates/images/browseBtn.png",
 							browseBtnName: "browse",
 							jsDelegate: "delegate" 
 				{rdelim};

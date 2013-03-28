@@ -11,28 +11,30 @@ $validSession = FALSE;
 // System init
 require_once( 'kapp_bootstrap.php' );
 
+use Kaltura\Client\Configuration as KalturaConfiguration;
+use Kaltura\Client\Client as KalturaClient;
+
 global $gClient;
 // Verify ks set
-if( !empty( $_COOKIE['ks'] ) && $ks = $_COOKIE['ks'] ){
+if( !empty( $_COOKIE['ks'] ) && !empty( $_COOKIE['partnerId'] ) && ($ks = $_COOKIE['ks']) && ($partnerId = $_COOKIE['partnerId']) ){
   // verify the KS is valid
-  require_once( KAPP_EXTERNALS_PATH.'kalturaapilib/library/Client.php');
-  $config = new KalturaConfiguration();
-  $config->serviceUrl = 'http://www.kaltura.com/';
+  $config = new KalturaConfiguration($partnerId);
+  $config->setServiceUrl('http://www.kaltura.com/');
   $gClient = new KalturaClient($config);
   $gClient->setKS($ks);
   try{
-	  $result = $gClient->session->get();
+	  $result = $gClient->session->get( $ks );
 	  $validSession = TRUE;
 	  $gKSmarty->assign( 'ks', $ks );
-	  $gKSmarty->assign( 'partnerId', $result->partnerId );
+	  $gKSmarty->assign( 'partnerId', $partnerId );
 	  $gKSmarty->assign( 'userId', $result->userId );
-	  $conversionProfile = $client->conversionProfile->getdefault();
+	  $conversionProfile = $gClient->conversionProfile->getDefault();
 	  $gKSmarty->assign( 'conversionProfileId', $conversionProfile->id );
   }catch( Exception $e ){
 	  echo 'Session Validation Failed: '.$e->getMessage();
   }
   // debug
-  echo $result; die;
+  // echo $result; die;
 }
 
 // Demo init
