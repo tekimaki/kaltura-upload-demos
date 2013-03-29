@@ -11,32 +11,6 @@ $validSession = FALSE;
 // System init
 require_once( 'kapp_bootstrap.php' );
 
-use Kaltura\Client\Configuration as KalturaConfiguration;
-use Kaltura\Client\Client as KalturaClient;
-
-global $gClient;
-// Verify ks set
-if( !empty( $_COOKIE['ks'] ) && !empty( $_COOKIE['partnerId'] ) && ($ks = $_COOKIE['ks']) && ($partnerId = $_COOKIE['partnerId']) ){
-  // verify the KS is valid
-  $config = new KalturaConfiguration($partnerId);
-  $config->setServiceUrl('http://www.kaltura.com/');
-  $gClient = new KalturaClient($config);
-  $gClient->setKS($ks);
-  try{
-	  $result = $gClient->session->get( $ks );
-	  $validSession = TRUE;
-	  $gKSmarty->assign( 'ks', $ks );
-	  $gKSmarty->assign( 'partnerId', $partnerId );
-	  $gKSmarty->assign( 'userId', $result->userId );
-	  $conversionProfile = $gClient->conversionProfile->getDefault();
-	  $gKSmarty->assign( 'conversionProfileId', $conversionProfile->id );
-  }catch( Exception $e ){
-	  echo 'Session Validation Failed: '.$e->getMessage();
-  }
-  // debug
-  // echo $result; die;
-}
-
 // Demo init
 // open xml file
 $xml = simplexml_load_file( './demos.xml' );
@@ -49,19 +23,38 @@ foreach ($rows as $v) {
 }
 $gKSmarty->assign( 'demos', $demoViews );
 
+global $gClient;
 // If particular demo is requested load it
 if( !empty( $_REQUEST['view'] ) ){
+	// Is the request valid
 	if( in_array( $_REQUEST['view'], array_keys($demoViews) ) ){
-		// print_r( $demoViews[$_REQUEST['view']]);
-		$viewTpl = $demoViews[$_REQUEST['view']]['tpl'];	
-		$pageTitle = $demoViews[$_REQUEST['view']]['title'];
+		$view = $demoViews[$_REQUEST['view']];
+		// Is the request at a unique url
+		if( !empty( $view['url'] ) ){ 
+			header('Location: http://demo.kaltura.us/uploaders/'.$view['url'] );
+			exit;
+		}
+		// Is the user authenitcated
+		require_once ( 'kauth_validate.php' );
+		// Yes, continue
+		$gKSmarty->assign( 'ks', $ks );
+		$gKSmarty->assign( 'partnerId', $partnerId );
+		$gKSmarty->assign( 'userId', $result->userId );
+		$conversionProfile = $gClient->conversionProfile->getDefault();
+		$gKSmarty->assign( 'conversionProfileId', $conversionProfile->id );
+		$viewTpl = $view['tpl'];	
+		$pageTitle = $view['title'];
 		$gKSmarty->assign( 'pageTitle', $pageTitle );
-		$gKSmarty->assign( 'uiconfId', $demoViews[$_REQUEST['view']]['uiconf_id'] );
+		$gKSmarty->assign( 'uiconfId', $view['uiconf_id'] );
 	}else{
 		// @TODO replace with graceful error handling
 		echo 'Invalid view request';
 		die;
 	}
+}
+// Errors
+if( !$validSession && !empty( $_REQUEST['error'] ) ){
+	$gKSmarty->assign( 'error', $_REQUEST['error'] );
 }
 
 $gKSmarty->display( $viewTpl, htmlentities($pageTitle) );

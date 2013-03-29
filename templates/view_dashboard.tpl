@@ -5,9 +5,12 @@
 <li><a href="./index.php?view={$demo.type}">{$demo.title}</a></li>
 {/foreach}
 </ul>
-{/strip}
+{if $error eq 'loginrequired'}
+<p><strong>Please login to access an uploader</strong></p>
+{/if}
 <p id="loginMsg">Please login to access demos</p>
 <div id="hostedAuthWidget"></div>
+{/strip}
 {literal}
 <script> 
 	kWidget.auth.getWidget( "hostedAuthWidget", function( userObject ){

@@ -23,5 +23,6 @@
 		<tpl>view_html5u.tpl</tpl>
 		<title>Kaltura HTML5 Uploader</title>
 		<uiconf_id></uiconf_id>
+		<url>html5/web/</url>
 	</demo>
 </demos>
